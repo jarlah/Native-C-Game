@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "SDL2/SDL.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-const int FRAME_RATE = 60;
 
 typedef struct {
     SDL_Window* window;
@@ -17,9 +14,7 @@ Game init() {
     SDL_Surface* surface = NULL;
     const char* error = NULL;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        const char *sdlError = SDL_GetError();
-        printf("SDL could not initialize! SDL_Error: %s\n", sdlError);
-        error = sdlError;
+        error = SDL_GetError();
     } else {
         window = SDL_CreateWindow(
                 "SDL Tutorial",
@@ -30,9 +25,7 @@ Game init() {
                 SDL_WINDOW_SHOWN
         );
         if (window == NULL) {
-            const char *sdlError = SDL_GetError();
-            printf("Window could not be created! SDL_Error: %s\n", sdlError);
-            error = sdlError;
+            error = SDL_GetError();
         } else {
             surface = SDL_GetWindowSurface(window);
         }
@@ -61,7 +54,7 @@ void closeGame (Game game, int surfaceCount, ...)
 int main(int argc, char *args[]) {
     Game game = init();
     if (game.error != NULL) {
-        printf( "Unable to initialize game %s", game.error);
+        printf( "Unable to initialize game: %s\n", game.error);
         return 1;
     }
 
