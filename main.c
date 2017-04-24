@@ -9,7 +9,7 @@ typedef struct {
     const char* error;
 } Game;
 
-Game init() {
+Game initGame() {
     SDL_Window* window = NULL;
     SDL_Surface* surface = NULL;
     const char* error = NULL;
@@ -52,7 +52,7 @@ void closeGame (Game game, int surfaceCount, ...)
 }
 
 int main(int argc, char *args[]) {
-    Game game = init();
+    Game game = initGame();
     if (game.error != NULL) {
         printf( "Unable to initialize game: %s\n", game.error);
         return 1;
